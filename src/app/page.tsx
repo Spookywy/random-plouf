@@ -15,6 +15,16 @@ export default function Home() {
     setParticipantsNames(newParticipantsNames);
   }
 
+  function addParticipant() {
+    setParticipantsNames([...participantsNames, ""]);
+  }
+
+  function removeParticipant(index: number) {
+    const newParticipantsNames = [...participantsNames];
+    newParticipantsNames.splice(index, 1);
+    setParticipantsNames(newParticipantsNames);
+  }
+
   return (
     <main className="flex flex-col items-center space-y-5 p-5">
       <h1 className="bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-6xl font-extrabold text-transparent">
@@ -27,9 +37,13 @@ export default function Home() {
           name={participantName}
           index={index}
           onNameChange={handleParticipantNameChange}
+          onRemoveParticipant={removeParticipant}
         />
       ))}
-      <button className="h-12 w-12 rounded-full bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900">
+      <button
+        className="h-12 w-12 rounded-full bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900"
+        onClick={addParticipant}
+      >
         <FontAwesomeIcon icon={faUserPlus} />
       </button>
       <div className="flex space-x-5">

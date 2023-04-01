@@ -5,12 +5,14 @@ type ParticipantProps = {
   name: string;
   index: number;
   onNameChange: (index: number, newName: string) => void;
+  onRemoveParticipant: (index: number) => void;
 };
 
 export default function Participant({
   name,
   index,
   onNameChange,
+  onRemoveParticipant,
 }: ParticipantProps) {
   function handleNameChange(event: React.ChangeEvent<HTMLInputElement>) {
     let newName = event.target.value;
@@ -26,7 +28,7 @@ export default function Participant({
         placeholder={`Participant ${index + 1}`}
         onChange={handleNameChange}
       />
-      <button className="p-2">
+      <button className="p-2" onClick={() => onRemoveParticipant(index)}>
         <FontAwesomeIcon icon={faTrash} />
       </button>
     </div>

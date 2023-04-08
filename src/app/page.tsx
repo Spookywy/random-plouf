@@ -16,20 +16,28 @@ export default function Home() {
   const [winnerStreak, setWinnerStreak] = useState<number>(0);
   const [showError, setShowError] = useState<boolean>(false);
 
+  function resetDrawHistory() {
+    setWinnerIndex(-1);
+    setWinnerStreak(0);
+  }
+
   function handleParticipantNameChange(index: number, newName: string) {
     const newParticipantsNames = [...participantsNames];
     newParticipantsNames[index] = newName;
     setParticipantsNames(newParticipantsNames);
+    resetDrawHistory();
   }
 
   function addParticipant() {
     setParticipantsNames([...participantsNames, ""]);
+    resetDrawHistory();
   }
 
   function removeParticipant(index: number) {
     const newParticipantsNames = [...participantsNames];
     newParticipantsNames.splice(index, 1);
     setParticipantsNames(newParticipantsNames);
+    resetDrawHistory();
   }
 
   function runRandomDraw() {
@@ -53,6 +61,10 @@ export default function Home() {
     setWinnerIndex(randomIndex);
   }
 
+  function createRandomTeams() {
+    alert("Not implemented yet!");
+  }
+
   return (
     <main className="flex flex-col items-center gap-4 pt-5">
       <p className="text-xl font-semibold">Add participants to the draw:</p>
@@ -73,23 +85,18 @@ export default function Home() {
         <FontAwesomeIcon icon={faUserPlus} />
       </button>
       {showError && (
-        <div className="flex items-center gap-2 text-red-600">
-          <FontAwesomeIcon icon={faCircleExclamation} />
-          <p className="font-bold">
-            You need at least two participants to run a random draw.
-          </p>
-        </div>
+        <p className="text-center font-bold text-red-600">
+          <FontAwesomeIcon icon={faCircleExclamation} /> You need at least two
+          participants to run a random draw.
+        </p>
       )}
       {winnerIndex !== -1 && !showError && (
-        <div className="flex items-center gap-2 text-green-500">
-          <FontAwesomeIcon icon={faCrown} />
-          <p className="text-xl font-bold">
-            {winnerStreak > 1
-              ? `${participantsNames[winnerIndex]} won the draw again (${winnerStreak} Streak)!`
-              : `${participantsNames[winnerIndex]} won the draw!`}
-          </p>
-          <FontAwesomeIcon icon={faCrown} />
-        </div>
+        <p className="text-center text-xl font-bold text-green-500">
+          <FontAwesomeIcon icon={faCrown} />{" "}
+          {winnerStreak > 1
+            ? `${participantsNames[winnerIndex]} won the draw again (${winnerStreak} Streak)!`
+            : `${participantsNames[winnerIndex]} won the draw!`}
+        </p>
       )}
       <div className="flex w-4/5 flex-col justify-center gap-4 sm:flex-row">
         <button
@@ -98,7 +105,10 @@ export default function Home() {
         >
           {winnerIndex === -1 ? "Run a randow draw" : "Run again"}
         </button>
-        <button className="h-10 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900 sm:w-60">
+        <button
+          onClick={createRandomTeams}
+          className="h-10 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900 sm:w-60"
+        >
           Create random teams
         </button>
       </div>

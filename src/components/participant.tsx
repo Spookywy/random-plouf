@@ -24,7 +24,7 @@ export default function Participant({
   return (
     <div>
       <input
-        className={`h-10 w-60 rounded p-2  sm:w-72 ${
+        className={`h-12 w-60 rounded p-4  sm:w-72 ${
           isWinner ? "bg-green-500 font-bold text-white" : "text-neutral-900"
         }`}
         type="text"

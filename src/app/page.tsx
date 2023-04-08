@@ -1,6 +1,10 @@
 "use client";
 import Participant from "@/components/participant";
-import { faUserPlus } from "@fortawesome/free-solid-svg-icons";
+import {
+  faCircleExclamation,
+  faCrown,
+  faUserPlus,
+} from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 
@@ -8,6 +12,8 @@ export default function Home() {
   const [participantsNames, setParticipantsNames] = useState<Array<string>>(
     new Array(4).fill("")
   );
+  const [winnerIndex, setWinnerIndex] = useState<number>(-1);
+  const [showError, setShowError] = useState<boolean>(false);
 
   function handleParticipantNameChange(index: number, newName: string) {
     const newParticipantsNames = [...participantsNames];
@@ -25,7 +31,17 @@ export default function Home() {
     setParticipantsNames(newParticipantsNames);
   }
 
-  function runRandomDraw() {}
+  function runRandomDraw() {
+    const participants = participantsNames.filter((name) => name !== "");
+    if (participants.length < 2) {
+      setShowError(true);
+      return;
+    }
+    setShowError(false);
+    setParticipantsNames(participants);
+    const randomIndex = Math.floor(Math.random() * participants.length);
+    setWinnerIndex(randomIndex);
+  }
 
   return (
     <main className="flex flex-col items-center gap-4 pt-5">
@@ -34,6 +50,7 @@ export default function Home() {
         <Participant
           key={index}
           name={participantName}
+          isWinner={index === winnerIndex}
           index={index}
           onNameChange={handleParticipantNameChange}
           onRemoveParticipant={removeParticipant}
@@ -45,12 +62,29 @@ export default function Home() {
       >
         <FontAwesomeIcon icon={faUserPlus} />
       </button>
+      {showError && (
+        <div className="flex items-center gap-2 text-red-600">
+          <FontAwesomeIcon icon={faCircleExclamation} />
+          <p className="font-bold">
+            You need at least two participants to run a random draw.
+          </p>
+        </div>
+      )}
+      {winnerIndex !== -1 && !showError && (
+        <div className="flex items-center gap-2 text-green-500">
+          <FontAwesomeIcon icon={faCrown} />
+          <p className="text-xl font-bold">
+            {participantsNames[winnerIndex]} won the draw!
+          </p>
+          <FontAwesomeIcon icon={faCrown} />
+        </div>
+      )}
       <div className="flex w-4/5 flex-col justify-center gap-4 sm:flex-row">
         <button
           onClick={runRandomDraw}
           className="h-10 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900 sm:w-60"
         >
-          Run a randow draw
+          {winnerIndex === -1 || showError ? "Run a randow draw" : "Run again"}
         </button>
         <button className="h-10 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900 sm:w-60">
           Create random teams

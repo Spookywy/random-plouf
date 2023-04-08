@@ -26,8 +26,8 @@ export default function Home() {
   }
 
   return (
-    <main className="flex flex-col items-center space-y-5 p-5">
-      <h1 className="bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-6xl font-extrabold text-transparent">
+    <main className="flex flex-col items-center gap-4 p-5">
+      <h1 className="bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-center text-6xl font-extrabold text-transparent">
         RanDOM Plouf
       </h1>
       <p className="text-xl font-semibold">Add participants to the draw:</p>
@@ -46,11 +46,11 @@ export default function Home() {
       >
         <FontAwesomeIcon icon={faUserPlus} />
       </button>
-      <div className="flex space-x-5">
-        <button className="h-10 w-44 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900">
+      <div className="flex w-4/5 flex-col justify-center gap-4 sm:flex-row">
+        <button className="h-10 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 sm:w-60">
           Run a randow draw
         </button>
-        <button className="h-10 w-44 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900">
+        <button className="h-10 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 sm:w-60">
           Create random teams
         </button>
       </div>

@@ -22,7 +22,7 @@ export default function Participant({
   return (
     <div>
       <input
-        className="h-10 w-60 rounded p-2 text-neutral-900"
+        className="h-10 w-60 rounded p-2 text-neutral-900 sm:w-72"
         type="text"
         value={name}
         placeholder={`Participant ${index + 1}`}

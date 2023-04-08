@@ -25,11 +25,10 @@ export default function Home() {
     setParticipantsNames(newParticipantsNames);
   }
 
+  function runRandomDraw() {}
+
   return (
-    <main className="flex flex-col items-center gap-4 p-5">
-      <h1 className="bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-center text-6xl font-extrabold text-transparent">
-        RanDOM Plouf
-      </h1>
+    <main className="flex flex-col items-center gap-4 pt-5">
       <p className="text-xl font-semibold">Add participants to the draw:</p>
       {participantsNames.map((participantName, index) => (
         <Participant
@@ -41,16 +40,19 @@ export default function Home() {
         />
       ))}
       <button
-        className="h-12 w-12 rounded-full bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900"
+        className="h-12 w-12 rounded-full bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900"
         onClick={addParticipant}
       >
         <FontAwesomeIcon icon={faUserPlus} />
       </button>
       <div className="flex w-4/5 flex-col justify-center gap-4 sm:flex-row">
-        <button className="h-10 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 sm:w-60">
+        <button
+          onClick={runRandomDraw}
+          className="h-10 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900 sm:w-60"
+        >
           Run a randow draw
         </button>
-        <button className="h-10 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 sm:w-60">
+        <button className="h-10 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900 sm:w-60">
           Create random teams
         </button>
       </div>

@@ -16,7 +16,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="bg-neutral-900 text-white">{children}</body>
+      <body className="bg-neutral-900 p-5 text-white">
+        <header>
+          <h1 className="bg-gradient-to-r from-pink-500 to-violet-500 bg-clip-text text-center text-6xl font-extrabold text-transparent">
+            RanDOM Plouf
+          </h1>
+        </header>
+        {children}
+      </body>
     </html>
   );
 }

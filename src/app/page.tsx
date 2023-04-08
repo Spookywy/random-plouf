@@ -13,6 +13,7 @@ export default function Home() {
     new Array(4).fill("")
   );
   const [winnerIndex, setWinnerIndex] = useState<number>(-1);
+  const [winnerStreak, setWinnerStreak] = useState<number>(0);
   const [showError, setShowError] = useState<boolean>(false);
 
   function handleParticipantNameChange(index: number, newName: string) {
@@ -37,9 +38,18 @@ export default function Home() {
       setShowError(true);
       return;
     }
+
     setShowError(false);
     setParticipantsNames(participants);
+
     const randomIndex = Math.floor(Math.random() * participants.length);
+
+    if (winnerIndex === randomIndex) {
+      setWinnerStreak(winnerStreak + 1);
+    } else {
+      setWinnerStreak(1);
+    }
+
     setWinnerIndex(randomIndex);
   }
 
@@ -74,7 +84,9 @@ export default function Home() {
         <div className="flex items-center gap-2 text-green-500">
           <FontAwesomeIcon icon={faCrown} />
           <p className="text-xl font-bold">
-            {participantsNames[winnerIndex]} won the draw!
+            {winnerStreak > 1
+              ? `${participantsNames[winnerIndex]} won the draw again (${winnerStreak} Streak)!`
+              : `${participantsNames[winnerIndex]} won the draw!`}
           </p>
           <FontAwesomeIcon icon={faCrown} />
         </div>
@@ -84,7 +96,7 @@ export default function Home() {
           onClick={runRandomDraw}
           className="h-10 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900 sm:w-60"
         >
-          {winnerIndex === -1 || showError ? "Run a randow draw" : "Run again"}
+          {winnerIndex === -1 ? "Run a randow draw" : "Run again"}
         </button>
         <button className="h-10 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900 sm:w-60">
           Create random teams

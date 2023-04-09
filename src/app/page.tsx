@@ -10,7 +10,7 @@ import { useState } from "react";
 
 export default function Home() {
   const [participantsNames, setParticipantsNames] = useState<Array<string>>(
-    new Array(4).fill("")
+    new Array(2).fill("")
   );
   const [winnerIndex, setWinnerIndex] = useState<number>(-1);
   const [winnerStreak, setWinnerStreak] = useState<number>(0);
@@ -66,7 +66,7 @@ export default function Home() {
   }
 
   return (
-    <main className="flex flex-col items-center gap-4 pt-5">
+    <main className="flex flex-col items-center gap-4 p-5">
       <p className="text-xl font-semibold">Add participants to the draw:</p>
       {participantsNames.map((participantName, index) => (
         <Participant

@@ -8,15 +8,15 @@ export default function Footer() {
       <p>
         Made with
         <FontAwesomeIcon className="mr-2 ml-2" icon={faHeart} />
-        by Valentin Menoret
+        by <b>Valentin Menoret</b>
       </p>
       <p>&#8226;</p>
       <a
         href="https://github.com/Spookywy/random-plouf"
         className="hover:text-neutral-100"
       >
+        <FontAwesomeIcon className="mr-2" icon={faGithub} />
         Source code
-        <FontAwesomeIcon className="ml-2 text-xl" icon={faGithub} />
       </a>
     </div>
   );

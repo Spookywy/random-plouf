@@ -1,6 +1,7 @@
 "use client";
 import Participant from "@/components/participant";
 import {
+  faArrowsUpDown,
   faCircleExclamation,
   faCrown,
   faUserPlus,
@@ -105,8 +106,8 @@ export default function Home() {
       </button>
       {showError && (
         <p className="text-center font-bold text-red-600">
-          <FontAwesomeIcon icon={faCircleExclamation} /> You need at least two
-          participants to run a random draw.
+          <FontAwesomeIcon icon={faCircleExclamation} /> Please enter at least
+          the name of two participants.
         </p>
       )}
       {winnerIndex !== -1 && !showError && (
@@ -125,17 +126,23 @@ export default function Home() {
           {winnerIndex === -1 ? "Run a randow draw" : "Run again"}
         </button>
         <div className="flex sm:w-60">
-          <select
-            value={numberOfTeams}
-            onChange={handleNumberOfTeamsChange}
-            className="h-10 rounded-l border-r border-neutral-400 bg-neutral-700 p-2 text-neutral-100"
-          >
-            {possibleNumberOfTeam.map((numbeOfTeam) => (
-              <option key={numbeOfTeam} value={numbeOfTeam}>
-                {numbeOfTeam}
-              </option>
-            ))}
-          </select>
+          <div className="relative">
+            <select
+              value={numberOfTeams}
+              onChange={handleNumberOfTeamsChange}
+              className="h-10 w-10 appearance-none rounded-none rounded-l border-r border-neutral-400 bg-neutral-700 p-2 text-neutral-100"
+            >
+              {possibleNumberOfTeam.map((numbeOfTeam) => (
+                <option key={numbeOfTeam} value={numbeOfTeam}>
+                  {numbeOfTeam}
+                </option>
+              ))}
+            </select>
+            <FontAwesomeIcon
+              icon={faArrowsUpDown}
+              className="pointer-events-none absolute right-2 top-3 text-white"
+            />
+          </div>
           <button
             onClick={createRandomTeams}
             className="h-10 flex-grow rounded-r bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900"

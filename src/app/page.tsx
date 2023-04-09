@@ -14,7 +14,16 @@ export default function Home() {
   );
   const [winnerIndex, setWinnerIndex] = useState<number>(-1);
   const [winnerStreak, setWinnerStreak] = useState<number>(0);
+
   const [showError, setShowError] = useState<boolean>(false);
+
+  const [numberOfTeams, setNumberOfTeams] = useState<number>(2);
+  const [teams, setTeams] = useState<Array<Array<string>>>([]);
+
+  const possibleNumberOfTeam = Array.from(
+    { length: 4 },
+    (_, index) => index + 2
+  );
 
   function resetDrawHistory() {
     setWinnerIndex(-1);
@@ -62,7 +71,17 @@ export default function Home() {
   }
 
   function createRandomTeams() {
-    alert("Not implemented yet!");
+    const participants = participantsNames.filter((name) => name !== "");
+    if (participants.length < 2) {
+      setShowError(true);
+      return;
+    }
+  }
+
+  function handleNumberOfTeamsChange(
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) {
+    setNumberOfTeams(parseInt(event.target.value));
   }
 
   return (
@@ -105,12 +124,25 @@ export default function Home() {
         >
           {winnerIndex === -1 ? "Run a randow draw" : "Run again"}
         </button>
-        <button
-          onClick={createRandomTeams}
-          className="h-10 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900 sm:w-60"
-        >
-          Create random teams
-        </button>
+        <div className="flex sm:w-60">
+          <select
+            value={numberOfTeams}
+            onChange={handleNumberOfTeamsChange}
+            className="h-10 rounded-l border-r border-neutral-400 bg-neutral-700 p-2 text-neutral-100"
+          >
+            {possibleNumberOfTeam.map((numbeOfTeam) => (
+              <option key={numbeOfTeam} value={numbeOfTeam}>
+                {numbeOfTeam}
+              </option>
+            ))}
+          </select>
+          <button
+            onClick={createRandomTeams}
+            className="h-10 flex-grow rounded-r bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900"
+          >
+            Create {numberOfTeams} random teams
+          </button>
+        </div>
       </div>
     </main>
   );

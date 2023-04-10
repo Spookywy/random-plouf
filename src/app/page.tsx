@@ -1,15 +1,17 @@
 "use client";
 import Participant from "@/components/participant";
 import {
-  faArrowsUpDown,
+  faAngleDown,
   faCircleExclamation,
   faCrown,
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Home() {
+  const router = useRouter();
   const [participantsNames, setParticipantsNames] = useState<Array<string>>(
     new Array(2).fill("")
   );
@@ -77,6 +79,7 @@ export default function Home() {
       setShowError(true);
       return;
     }
+    router.push("/team-results");
   }
 
   function handleNumberOfTeamsChange(
@@ -118,19 +121,19 @@ export default function Home() {
             : `${participantsNames[winnerIndex]} won the draw!`}
         </p>
       )}
-      <div className="flex w-4/5 flex-col justify-center gap-4 sm:flex-row">
+      <div className="flex w-4/5 flex-col items-center justify-center gap-4 sm:flex-row">
         <button
           onClick={runRandomDraw}
-          className="h-10 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900 sm:w-60"
+          className="h-10 w-72 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900"
         >
           {winnerIndex === -1 ? "Run a randow draw" : "Run again"}
         </button>
-        <div className="flex sm:w-60">
+        <div className="flex w-72">
           <div className="relative">
             <select
               value={numberOfTeams}
               onChange={handleNumberOfTeamsChange}
-              className="h-10 w-10 appearance-none rounded-none rounded-l border-r border-neutral-400 bg-neutral-700 p-2 text-neutral-100"
+              className="h-10 w-12 appearance-none rounded-none rounded-l border-r border-neutral-400 bg-neutral-700 p-2 text-neutral-100"
             >
               {possibleNumberOfTeam.map((numbeOfTeam) => (
                 <option key={numbeOfTeam} value={numbeOfTeam}>
@@ -139,7 +142,7 @@ export default function Home() {
               ))}
             </select>
             <FontAwesomeIcon
-              icon={faArrowsUpDown}
+              icon={faAngleDown}
               className="pointer-events-none absolute right-2 top-3 text-white"
             />
           </div>

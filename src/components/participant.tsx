@@ -32,7 +32,7 @@ export default function Participant({
         placeholder={`Participant ${index + 1}`}
         onChange={handleNameChange}
       />
-      <button className="p-2" onClick={() => onRemoveParticipant(index)}>
+      <button className="ml-3 p-2" onClick={() => onRemoveParticipant(index)}>
         <FontAwesomeIcon icon={faTrash} />
       </button>
     </div>

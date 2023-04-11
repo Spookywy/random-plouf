@@ -79,7 +79,6 @@ export default function Home() {
       setShowError(true);
       return;
     }
-    router.push("/team-results");
   }
 
   function handleNumberOfTeamsChange(
@@ -90,7 +89,7 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center gap-4 p-5">
-      <p className="text-xl font-semibold">Add participants to the draw:</p>
+      <p className="text-xl font-semibold">Add participants:</p>
       {participantsNames.map((participantName, index) => (
         <Participant
           key={index}
@@ -133,7 +132,7 @@ export default function Home() {
             <select
               value={numberOfTeams}
               onChange={handleNumberOfTeamsChange}
-              className="h-10 w-12 appearance-none rounded-none rounded-l border-r border-neutral-400 bg-neutral-700 p-2 text-neutral-100"
+              className="h-10 w-12 appearance-none rounded-none rounded-l border-r border-neutral-400 bg-neutral-700 pl-3 text-neutral-100"
             >
               {possibleNumberOfTeam.map((numbeOfTeam) => (
                 <option key={numbeOfTeam} value={numbeOfTeam}>
@@ -150,7 +149,7 @@ export default function Home() {
             onClick={createRandomTeams}
             className="h-10 flex-grow rounded-r bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900"
           >
-            Create {numberOfTeams} random teams
+            Create <b>{numberOfTeams}</b> random teams
           </button>
         </div>
       </div>

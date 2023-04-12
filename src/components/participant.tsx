@@ -24,7 +24,7 @@ export default function Participant({
   return (
     <div>
       <input
-        className={`h-12 w-60 rounded p-4  sm:w-72 ${
+        className={`relative h-12 w-60 rounded p-4 sm:w-72 ${
           isWinner ? "bg-green-500 font-bold text-white" : "text-neutral-900"
         }`}
         type="text"
@@ -32,7 +32,10 @@ export default function Participant({
         placeholder={`Participant ${index + 1}`}
         onChange={handleNameChange}
       />
-      <button className="ml-3 p-2" onClick={() => onRemoveParticipant(index)}>
+      <button
+        className="absolute ml-2 p-2"
+        onClick={() => onRemoveParticipant(index)}
+      >
         <FontAwesomeIcon icon={faTrash} />
       </button>
     </div>

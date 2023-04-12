@@ -119,7 +119,7 @@ export default function Home() {
             <p className="text-center text-xl font-bold text-green-500">
               <FontAwesomeIcon icon={faCrown} />{" "}
               {winnerStreak > 1
-                ? `${participantsNames[winnerIndex]} won the draw again (${winnerStreak} Streak)!`
+                ? `${participantsNames[winnerIndex]} won the draw again! (${winnerStreak} Streak)`
                 : `${participantsNames[winnerIndex]} won the draw!`}
             </p>
           )}

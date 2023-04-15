@@ -1,6 +1,7 @@
 "use client";
 import CreateTeamButton from "@/components/createTeamButton";
 import Participant from "@/components/participant";
+import shuffleArray from "@/utils/shuffleArray";
 import {
   faCircleExclamation,
   faCrown,
@@ -81,7 +82,21 @@ export default function Home() {
       setShowError(true);
       return;
     }
+
+    setShowError(false);
     setSectionToShow("team");
+
+    const shuffledParticipants = shuffleArray(participants);
+    const teams = Array.from<string[], string[]>(
+      { length: numberOfTeams },
+      () => []
+    );
+
+    for (let i = 0; i < shuffledParticipants.length; i++) {
+      teams[i % numberOfTeams].push(shuffledParticipants[i]);
+    }
+
+    setTeams(teams);
   }
 
   function goBackToParticipants() {

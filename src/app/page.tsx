@@ -8,6 +8,7 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import classNames from "classnames";
 import { useState } from "react";
 
 export default function Home() {
@@ -107,7 +108,7 @@ export default function Home() {
     <main className="flex flex-col items-center gap-4 p-5">
       {sectionToShow === "participants" ? (
         <>
-          <p className="text-xl font-semibold">Add participants:</p>
+          <p className="text-xl font-semibold">Add participants</p>
           {participantsNames.map((participantName, index) => (
             <Participant
               key={index}
@@ -154,7 +155,27 @@ export default function Home() {
         </>
       ) : (
         <>
-          <p className="text-xl font-semibold">Team results:</p>
+          {teams.map((team, index) => (
+            <div key={index} className="mb-5 text-center">
+              <p
+                className={`mb-2 bg-gradient-to-r bg-clip-text text-2xl font-semibold text-transparent
+              ${classNames({
+                " from-blue-500 to-red-500": index === 0,
+                " from-yellow-500 to-blue-500": index === 1,
+                "from-blue-500 to-green-500": index === 2,
+                "from-green-500 to-yellow-500": index === 3,
+                "from-yellow-500 to-red-500": index === 4,
+              })}`}
+              >
+                Team {index + 1}
+              </p>
+              {team.map((participant, index) => (
+                <p className="text-xl" key={index}>
+                  {participant}
+                </p>
+              ))}
+            </div>
+          ))}
           <button
             onClick={goBackToParticipants}
             className="h-10 w-72 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900"

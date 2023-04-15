@@ -7,6 +7,7 @@ type ParticipantProps = {
   index: number;
   onNameChange: (index: number, newName: string) => void;
   onRemoveParticipant: (index: number) => void;
+  lastParticipantInputRef: React.RefObject<HTMLInputElement> | null;
 };
 
 export default function Participant({
@@ -15,6 +16,7 @@ export default function Participant({
   index,
   onNameChange,
   onRemoveParticipant,
+  lastParticipantInputRef,
 }: ParticipantProps) {
   function handleNameChange(event: React.ChangeEvent<HTMLInputElement>) {
     let newName = event.target.value;
@@ -31,6 +33,7 @@ export default function Participant({
         value={name}
         placeholder={`Participant ${index + 1}`}
         onChange={handleNameChange}
+        ref={lastParticipantInputRef}
       />
       <button
         className="absolute ml-2 p-2"

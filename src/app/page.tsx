@@ -10,12 +10,17 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
+  const initialNumberOfParticipants = 2;
+  const initialNumberOfTeams = 2;
+
   const [participantsNames, setParticipantsNames] = useState<Array<string>>(
-    new Array(2).fill("")
+    new Array(initialNumberOfParticipants).fill("")
   );
+  const [participantsHaveBeenAdded, setParticipantsHaveBeenAdded] =
+    useState<boolean>(false);
   const [winnerIndex, setWinnerIndex] = useState<number>(-1);
   const [winnerStreak, setWinnerStreak] = useState<number>(0);
 
@@ -24,8 +29,11 @@ export default function Home() {
     "participants"
   );
 
-  const [numberOfTeams, setNumberOfTeams] = useState<number>(2);
+  const [numberOfTeams, setNumberOfTeams] =
+    useState<number>(initialNumberOfTeams);
   const [teams, setTeams] = useState<Array<Array<string>>>([]);
+
+  const lastParticipantInputRef = useRef<HTMLInputElement>(null);
 
   function resetDrawHistory() {
     setWinnerIndex(-1);
@@ -40,6 +48,7 @@ export default function Home() {
   }
 
   function addParticipant() {
+    if (!participantsHaveBeenAdded) setParticipantsHaveBeenAdded(true);
     setParticipantsNames([...participantsNames, ""]);
     resetDrawHistory();
   }
@@ -86,6 +95,8 @@ export default function Home() {
     }
 
     setShowError(false);
+    setParticipantsNames(participants);
+
     resetDrawHistory();
     setSectionToShow("team");
 
@@ -112,6 +123,12 @@ export default function Home() {
     setSectionToShow("participants");
   }
 
+  useEffect(() => {
+    if (lastParticipantInputRef.current && participantsHaveBeenAdded) {
+      lastParticipantInputRef.current.focus();
+    }
+  }, [participantsNames.length, participantsHaveBeenAdded]);
+
   return (
     <main className="flex flex-col items-center gap-4 p-5">
       {sectionToShow === "participants" ? (
@@ -125,6 +142,11 @@ export default function Home() {
               index={index}
               onNameChange={handleParticipantNameChanged}
               onRemoveParticipant={removeParticipant}
+              lastParticipantInputRef={
+                index === participantsNames.length - 1
+                  ? lastParticipantInputRef
+                  : null
+              }
             />
           ))}
           <button

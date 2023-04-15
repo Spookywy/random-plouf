@@ -2,13 +2,17 @@ import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
+import type { Metadata } from "next";
 import "./globals.css";
 config.autoAddCss = false;
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "RanDOM Plouf",
   description:
     "A website for conducting random draws and generating teams randomly.",
+  openGraph: {
+    images: ["https://random-plouf.vercel.app/api/og"],
+  },
 };
 
 export default function RootLayout({

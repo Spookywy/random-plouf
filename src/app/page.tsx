@@ -85,6 +85,7 @@ export default function Home() {
     }
 
     setShowError(false);
+    resetDrawHistory();
     setSectionToShow("team");
 
     const shuffledParticipants = shuffleArray(participants);
@@ -164,7 +165,7 @@ export default function Home() {
           {teams.map((team, index) => (
             <div key={index} className="mb-5 text-center">
               <p
-                className={`mb-2 bg-gradient-to-r bg-clip-text text-2xl font-semibold text-transparent
+                className={`mb-2 bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent
               ${classNames({
                 " from-blue-500 to-red-500": index === 0,
                 " from-yellow-500 to-blue-500": index === 1,
@@ -176,7 +177,7 @@ export default function Home() {
                 Team {index + 1}
               </p>
               {team.map((participant, index) => (
-                <p className="text-xl" key={index}>
+                <p className="text-2xl font-semibold" key={index}>
                   {participant}
                 </p>
               ))}

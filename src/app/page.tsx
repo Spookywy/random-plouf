@@ -1,6 +1,8 @@
 "use client";
-import CreateTeamButton from "@/components/createTeamButton";
+import CreateTeamButton from "@/components/buttons/createTeamButton";
+import StyledButton from "@/components/buttons/styledButton";
 import Participant from "@/components/participant";
+import Team from "@/components/team";
 import shuffleArray from "@/utils/shuffleArray";
 import {
   faCircleExclamation,
@@ -8,7 +10,6 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import classNames from "classnames";
 import { useState } from "react";
 
 export default function Home() {
@@ -147,12 +148,10 @@ export default function Home() {
             </p>
           )}
           <div className="flex w-4/5 flex-col items-center justify-center gap-4 sm:flex-row">
-            <button
+            <StyledButton
               onClick={runRandomDraw}
-              className="h-10 w-72 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900"
-            >
-              {winnerIndex === -1 ? "Run a randow draw" : "Run again"}
-            </button>
+              label={winnerIndex === -1 ? "Run a randow draw" : "Run again"}
+            />
             <CreateTeamButton
               numberOfTeams={numberOfTeams}
               handleNumberOfTeamsChanged={handleNumberOfTeamsChanged}
@@ -162,33 +161,11 @@ export default function Home() {
         </>
       ) : (
         <>
+          <p className="text-xl font-semibold">Team results</p>
           {teams.map((team, index) => (
-            <div key={index} className="mb-5 text-center">
-              <p
-                className={`mb-2 bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent
-              ${classNames({
-                " from-blue-500 to-red-500": index === 0,
-                " from-yellow-500 to-blue-500": index === 1,
-                "from-blue-500 to-green-500": index === 2,
-                "from-green-500 to-yellow-500": index === 3,
-                "from-yellow-500 to-red-500": index === 4,
-              })}`}
-              >
-                Team {index + 1}
-              </p>
-              {team.map((participant, index) => (
-                <p className="text-2xl font-semibold" key={index}>
-                  {participant}
-                </p>
-              ))}
-            </div>
+            <Team key={index} team={team} teamIndex={index} />
           ))}
-          <button
-            onClick={goBackToParticipants}
-            className="h-10 w-72 rounded bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900"
-          >
-            Go back
-          </button>
+          <StyledButton onClick={goBackToParticipants} label="Go back" />
         </>
       )}
     </main>

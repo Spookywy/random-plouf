@@ -88,13 +88,19 @@ export default function Home() {
     setSectionToShow("team");
 
     const shuffledParticipants = shuffleArray(participants);
+
+    const numberOfTeamToCreate =
+      participantsNames.length > numberOfTeams
+        ? numberOfTeams
+        : participantsNames.length;
+
     const teams = Array.from<string[], string[]>(
-      { length: numberOfTeams },
+      { length: numberOfTeamToCreate },
       () => []
     );
 
     for (let i = 0; i < shuffledParticipants.length; i++) {
-      teams[i % numberOfTeams].push(shuffledParticipants[i]);
+      teams[i % numberOfTeamToCreate].push(shuffledParticipants[i]);
     }
 
     setTeams(teams);

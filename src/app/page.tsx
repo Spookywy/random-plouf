@@ -19,7 +19,7 @@ export default function Home() {
   const [participantsNames, setParticipantsNames] = useState<Array<string>>(
     new Array(initialNumberOfParticipants).fill("")
   );
-  const [participantsHaveBeenAdded, setParticipantsHaveBeenAdded] =
+  const [shouldFocusLastInput, setShouldFocusLastInput] =
     useState<boolean>(false);
   const [winnerIndex, setWinnerIndex] = useState<number>(-1);
   const [winnerStreak, setWinnerStreak] = useState<number>(0);
@@ -48,12 +48,13 @@ export default function Home() {
   }
 
   function addParticipant() {
-    if (!participantsHaveBeenAdded) setParticipantsHaveBeenAdded(true);
+    setShouldFocusLastInput(true);
     setParticipantsNames([...participantsNames, ""]);
     resetDrawHistory();
   }
 
   function removeParticipant(index: number) {
+    setShouldFocusLastInput(false);
     const newParticipantsNames = [...participantsNames];
     newParticipantsNames.splice(index, 1);
     setParticipantsNames(newParticipantsNames);
@@ -124,10 +125,10 @@ export default function Home() {
   }
 
   useEffect(() => {
-    if (lastParticipantInputRef.current && participantsHaveBeenAdded) {
+    if (lastParticipantInputRef.current && shouldFocusLastInput) {
       lastParticipantInputRef.current.focus();
     }
-  }, [participantsNames.length, participantsHaveBeenAdded]);
+  }, [participantsNames.length, shouldFocusLastInput]);
 
   return (
     <main className="flex flex-col items-center gap-4 p-5">

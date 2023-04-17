@@ -68,6 +68,7 @@ export default function Home() {
       return;
     }
 
+    setShouldFocusLastInput(false);
     setShowError(false);
     setParticipantsNames(participants);
 

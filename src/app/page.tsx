@@ -3,6 +3,7 @@ import CreateTeamButton from "@/components/buttons/createTeamButton";
 import StyledButton from "@/components/buttons/styledButton";
 import Participant from "@/components/participant";
 import Team from "@/components/team";
+import getNewRandomNumber from "@/utils/getNewRandomNumber";
 import shuffleArray from "@/utils/shuffleArray";
 import {
   faCircleExclamation,
@@ -22,6 +23,7 @@ export default function Home() {
   const [shouldFocusLastInput, setShouldFocusLastInput] =
     useState<boolean>(false);
   const [drawIsInProgress, setDrawIsInProgress] = useState<boolean>(false);
+  const [participantToAnimate, setParticipantToAnimate] = useState<number>(-1);
   const [teamsAreAnimated, setTeamsAreAnimated] = useState<boolean>(false);
   const [winnerIndex, setWinnerIndex] = useState<number>(-1);
   const [winnerStreak, setWinnerStreak] = useState<number>(0);
@@ -75,15 +77,29 @@ export default function Home() {
     setParticipantsNames(participants);
 
     setDrawIsInProgress(true);
-    setTimeout(() => {
-      setDrawIsInProgress(false);
 
-      runRandomDraw();
-    }, 1000);
+    let animationTimePerParticipant = 300;
+    let newRandomNumber = getNewRandomNumber(participants.length);
+
+    const intervalId = setInterval(() => {
+      setParticipantToAnimate(newRandomNumber);
+      newRandomNumber = getNewRandomNumber(
+        participants.length,
+        newRandomNumber
+      );
+    }, animationTimePerParticipant);
+
+    setTimeout(() => {
+      clearInterval(intervalId);
+      setDrawIsInProgress(false);
+      setParticipantToAnimate(-1);
+
+      runRandomDraw(participants);
+    }, 2500);
   }
 
-  function runRandomDraw() {
-    const randomIndex = Math.floor(Math.random() * participantsNames.length);
+  function runRandomDraw(participant: Array<string>) {
+    const randomIndex = Math.floor(Math.random() * participant.length);
 
     if (winnerIndex === randomIndex) {
       setWinnerStreak(winnerStreak + 1);
@@ -160,8 +176,8 @@ export default function Home() {
             <Participant
               key={index}
               name={participantName}
-              isWinner={index === winnerIndex}
-              isAnimated={drawIsInProgress}
+              isWinner={index === winnerIndex && !drawIsInProgress}
+              isAnimated={drawIsInProgress && index === participantToAnimate}
               index={index}
               onNameChange={handleParticipantNameChanged}
               onRemoveParticipant={removeParticipant}

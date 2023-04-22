@@ -30,11 +30,11 @@ export default function Participant({
       <input
         className={`relative h-12 w-60 rounded p-4 sm:w-72
         ${
-          isWinner && !isAnimated
+          isWinner || isAnimated
             ? "bg-green-500 font-bold text-white"
             : "text-neutral-900"
         }
-        ${isAnimated ? "animate-bounce" : ""}`}
+        ${isAnimated ? "animate-ping" : ""}`}
         type="text"
         value={name}
         placeholder={`Participant ${index + 1}`}

@@ -7,12 +7,14 @@ type CreateTeamButtonProps = {
     event: React.ChangeEvent<HTMLSelectElement>
   ) => void;
   createRandomTeams: () => void;
+  disabled?: boolean;
 };
 
 export default function CreateTeamButton({
   numberOfTeams,
   handleNumberOfTeamsChanged,
   createRandomTeams,
+  disabled,
 }: CreateTeamButtonProps) {
   const possibleNumberOfTeam = Array.from(
     { length: 4 },
@@ -39,6 +41,7 @@ export default function CreateTeamButton({
         />
       </div>
       <button
+        disabled={disabled}
         onClick={createRandomTeams}
         className="h-10 flex-grow rounded-r bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900"
       >

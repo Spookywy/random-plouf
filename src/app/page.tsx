@@ -21,7 +21,8 @@ export default function Home() {
   );
   const [shouldFocusLastInput, setShouldFocusLastInput] =
     useState<boolean>(false);
-  const [inputsAreAnimated, setInputsAreAnimated] = useState<boolean>(false);
+  const [drawIsInProgress, setDrawIsInProgress] = useState<boolean>(false);
+  const [teamsAreAnimated, setTeamsAreAnimated] = useState<boolean>(false);
   const [winnerIndex, setWinnerIndex] = useState<number>(-1);
   const [winnerStreak, setWinnerStreak] = useState<number>(0);
 
@@ -62,7 +63,7 @@ export default function Home() {
     resetDrawHistory();
   }
 
-  function runRandomDraw() {
+  function handleRunRandomDrawButtonClick() {
     const participants = participantsNames.filter((name) => name !== "");
     if (participants.length < 2) {
       setShowError(true);
@@ -73,20 +74,24 @@ export default function Home() {
     setShowError(false);
     setParticipantsNames(participants);
 
-    setInputsAreAnimated(true);
+    setDrawIsInProgress(true);
     setTimeout(() => {
-      setInputsAreAnimated(false);
+      setDrawIsInProgress(false);
 
-      const randomIndex = Math.floor(Math.random() * participants.length);
-
-      if (winnerIndex === randomIndex) {
-        setWinnerStreak(winnerStreak + 1);
-      } else {
-        setWinnerStreak(1);
-      }
-
-      setWinnerIndex(randomIndex);
+      runRandomDraw();
     }, 1000);
+  }
+
+  function runRandomDraw() {
+    const randomIndex = Math.floor(Math.random() * participantsNames.length);
+
+    if (winnerIndex === randomIndex) {
+      setWinnerStreak(winnerStreak + 1);
+    } else {
+      setWinnerStreak(1);
+    }
+
+    setWinnerIndex(randomIndex);
   }
 
   function handleNumberOfTeamsChanged(
@@ -95,7 +100,7 @@ export default function Home() {
     setNumberOfTeams(parseInt(event.target.value));
   }
 
-  function createRandomTeams() {
+  function handleCreateTeamsButtonClick() {
     const participants = participantsNames.filter((name) => name !== "");
     if (participants.length < 2) {
       setShowError(true);
@@ -108,7 +113,16 @@ export default function Home() {
     resetDrawHistory();
     setSectionToShow("team");
 
-    const shuffledParticipants = shuffleArray(participants);
+    createRandomTeams();
+  }
+
+  function createRandomTeams() {
+    setTeamsAreAnimated(true);
+    setTimeout(() => {
+      setTeamsAreAnimated(false);
+    }, 100);
+
+    const shuffledParticipants = shuffleArray(participantsNames);
 
     const numberOfTeamToCreate =
       participantsNames.length > numberOfTeams
@@ -147,7 +161,7 @@ export default function Home() {
               key={index}
               name={participantName}
               isWinner={index === winnerIndex}
-              isAnimated={inputsAreAnimated}
+              isAnimated={drawIsInProgress}
               index={index}
               onNameChange={handleParticipantNameChanged}
               onRemoveParticipant={removeParticipant}
@@ -170,23 +184,25 @@ export default function Home() {
               least the name of two participants.
             </p>
           )}
-          {winnerIndex !== -1 && !showError && (
+          {winnerIndex !== -1 && !showError && !drawIsInProgress && (
             <p className="text-center text-xl font-bold text-green-500">
               <FontAwesomeIcon icon={faCrown} />{" "}
               {winnerStreak > 1
-                ? `${participantsNames[winnerIndex]} won the draw again! (${winnerStreak} Streak)`
+                ? `${participantsNames[winnerIndex]} won the draw again!`
                 : `${participantsNames[winnerIndex]} won the draw!`}
             </p>
           )}
           <div className="flex w-4/5 flex-col items-center justify-center gap-4 sm:flex-row">
             <StyledButton
-              onClick={runRandomDraw}
+              disabled={drawIsInProgress}
+              onClick={handleRunRandomDrawButtonClick}
               label={winnerIndex === -1 ? "Run a randow draw" : "Run again"}
             />
             <CreateTeamButton
+              disabled={drawIsInProgress}
               numberOfTeams={numberOfTeams}
               handleNumberOfTeamsChanged={handleNumberOfTeamsChanged}
-              createRandomTeams={createRandomTeams}
+              createRandomTeams={handleCreateTeamsButtonClick}
             />
           </div>
         </>
@@ -194,8 +210,14 @@ export default function Home() {
         <>
           <p className="text-xl font-semibold">Team results</p>
           {teams.map((team, index) => (
-            <Team key={index} team={team} teamIndex={index} />
+            <Team
+              key={index}
+              team={team}
+              teamIndex={index}
+              isAnimated={teamsAreAnimated}
+            />
           ))}
+          <StyledButton onClick={createRandomTeams} label="Create new teams" />
           <StyledButton onClick={goBackToParticipants} label="Go back" />
         </>
       )}

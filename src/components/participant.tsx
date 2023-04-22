@@ -29,7 +29,11 @@ export default function Participant({
     <div>
       <input
         className={`relative h-12 w-60 rounded p-4 sm:w-72
-        ${isWinner ? "bg-green-500 font-bold text-white" : "text-neutral-900"}
+        ${
+          isWinner && !isAnimated
+            ? "bg-green-500 font-bold text-white"
+            : "text-neutral-900"
+        }
         ${isAnimated ? "animate-bounce" : ""}`}
         type="text"
         value={name}

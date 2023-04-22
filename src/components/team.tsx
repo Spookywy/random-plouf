@@ -3,11 +3,12 @@ import classNames from "classnames";
 type TeamProps = {
   team: Array<string>;
   teamIndex: number;
+  isAnimated?: boolean;
 };
 
-export default function Team({ team, teamIndex }: TeamProps) {
+export default function Team({ team, teamIndex, isAnimated }: TeamProps) {
   return (
-    <div className="mb-5 text-center">
+    <div className={`mb-5 text-center ${isAnimated ? "animate-ping" : ""}`}>
       <p
         className={`mb-2 bg-gradient-to-r bg-clip-text text-4xl font-bold text-transparent
               ${classNames({

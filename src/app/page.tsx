@@ -21,6 +21,7 @@ export default function Home() {
   );
   const [shouldFocusLastInput, setShouldFocusLastInput] =
     useState<boolean>(false);
+  const [inputsAreAnimated, setInputsAreAnimated] = useState<boolean>(false);
   const [winnerIndex, setWinnerIndex] = useState<number>(-1);
   const [winnerStreak, setWinnerStreak] = useState<number>(0);
 
@@ -72,15 +73,20 @@ export default function Home() {
     setShowError(false);
     setParticipantsNames(participants);
 
-    const randomIndex = Math.floor(Math.random() * participants.length);
+    setInputsAreAnimated(true);
+    setTimeout(() => {
+      setInputsAreAnimated(false);
 
-    if (winnerIndex === randomIndex) {
-      setWinnerStreak(winnerStreak + 1);
-    } else {
-      setWinnerStreak(1);
-    }
+      const randomIndex = Math.floor(Math.random() * participants.length);
 
-    setWinnerIndex(randomIndex);
+      if (winnerIndex === randomIndex) {
+        setWinnerStreak(winnerStreak + 1);
+      } else {
+        setWinnerStreak(1);
+      }
+
+      setWinnerIndex(randomIndex);
+    }, 1000);
   }
 
   function handleNumberOfTeamsChanged(
@@ -141,6 +147,7 @@ export default function Home() {
               key={index}
               name={participantName}
               isWinner={index === winnerIndex}
+              isAnimated={inputsAreAnimated}
               index={index}
               onNameChange={handleParticipantNameChanged}
               onRemoveParticipant={removeParticipant}

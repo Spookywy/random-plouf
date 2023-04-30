@@ -11,6 +11,7 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useTranslation from "next-translate/useTranslation";
 import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
@@ -38,6 +39,8 @@ export default function Home() {
   const [teams, setTeams] = useState<Array<Array<string>>>([]);
 
   const lastParticipantInputRef = useRef<HTMLInputElement>(null);
+
+  const { t, lang } = useTranslation("home");
 
   function resetDrawHistory() {
     setWinnerIndex(-1);
@@ -171,7 +174,7 @@ export default function Home() {
     <main className="flex flex-col items-center gap-4 p-5">
       {sectionToShow === "participants" ? (
         <>
-          <p className="text-xl font-semibold">Add participants</p>
+          <p className="text-xl font-semibold">{t("addParticipants")}</p>
           {participantsNames.map((participantName, index) => (
             <Participant
               key={index}

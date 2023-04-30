@@ -1,5 +1,6 @@
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useTranslation from "next-translate/useTranslation";
 
 type ParticipantProps = {
   name: string;
@@ -24,6 +25,7 @@ export default function Participant({
     let newName = event.target.value;
     onNameChange(index, newName);
   }
+  const { t } = useTranslation("common");
 
   return (
     <div>
@@ -37,7 +39,7 @@ export default function Participant({
         ${isAnimated ? "animate-ping" : ""}`}
         type="text"
         value={name}
-        placeholder={`Participant ${index + 1}`}
+        placeholder={t("participant", { participantNumber: index + 1 })}
         onChange={handleNameChange}
         ref={lastParticipantInputRef}
       />

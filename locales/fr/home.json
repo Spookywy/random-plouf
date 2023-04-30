@@ -1,0 +1,11 @@
+{
+  "addParticipants": "Ajouter des participants",
+  "runRandowDraw": "Tirer au sort",
+  "runAgain": "Lancer à nouveau",
+  "notEnoughParticipants": "Veuillez entrer au moins le nom de deux participants.",
+  "drawWinner": "{{winnerName}} a gagné le tirage !",
+  "drawWinnerAgain": "{{winnerName}} a de nouveau gagné le tirage !",
+  "teamsAre": "Les équipes sont :",
+  "createNewTeams": "Créer de nouvelles équipes",
+  "goBack": "Retour"
+}

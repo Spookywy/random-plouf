@@ -1,4 +1,5 @@
 import classNames from "classnames";
+import useTranslation from "next-translate/useTranslation";
 
 type TeamProps = {
   team: Array<string>;
@@ -7,6 +8,8 @@ type TeamProps = {
 };
 
 export default function Team({ team, teamIndex, isAnimated }: TeamProps) {
+  const { t } = useTranslation("common");
+
   return (
     <div className={`mb-5 text-center ${isAnimated ? "animate-ping" : ""}`}>
       <p
@@ -19,7 +22,7 @@ export default function Team({ team, teamIndex, isAnimated }: TeamProps) {
                 "from-yellow-500 to-red-500": teamIndex === 4,
               })}`}
       >
-        Team {teamIndex + 1}
+        {t("team", { teamNumber: teamIndex + 1 })}
       </p>
       {team.map((member, index) => (
         <p className="text-2xl font-semibold" key={index}>

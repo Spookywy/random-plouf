@@ -11,6 +11,7 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useTranslation from "next-translate/useTranslation";
 import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
@@ -38,6 +39,8 @@ export default function Home() {
   const [teams, setTeams] = useState<Array<Array<string>>>([]);
 
   const lastParticipantInputRef = useRef<HTMLInputElement>(null);
+
+  const { t } = useTranslation("home");
 
   function resetDrawHistory() {
     setWinnerIndex(-1);
@@ -171,7 +174,7 @@ export default function Home() {
     <main className="flex flex-col items-center gap-4 p-5">
       {sectionToShow === "participants" ? (
         <>
-          <p className="text-xl font-semibold">Add participants</p>
+          <p className="text-xl font-semibold">{t("addParticipants")}</p>
           {participantsNames.map((participantName, index) => (
             <Participant
               key={index}
@@ -196,23 +199,27 @@ export default function Home() {
           </button>
           {showError && (
             <p className="text-center font-bold text-red-600">
-              <FontAwesomeIcon icon={faCircleExclamation} /> Please enter at
-              least the name of two participants.
+              <FontAwesomeIcon icon={faCircleExclamation} />{" "}
+              {t("notEnoughParticipants")}
             </p>
           )}
           {winnerIndex !== -1 && !showError && !drawIsInProgress && (
             <p className="text-center text-xl font-bold text-green-500">
               <FontAwesomeIcon icon={faCrown} />{" "}
               {winnerStreak > 1
-                ? `${participantsNames[winnerIndex]} won the draw again!`
-                : `${participantsNames[winnerIndex]} won the draw!`}
+                ? t("drawWinnerAgain", {
+                    winnerName: participantsNames[winnerIndex],
+                  })
+                : t("drawWinner", {
+                    winnerName: participantsNames[winnerIndex],
+                  })}
             </p>
           )}
           <div className="flex w-4/5 flex-col items-center justify-center gap-4 sm:flex-row">
             <StyledButton
               disabled={drawIsInProgress}
               onClick={handleRunRandomDrawButtonClick}
-              label={winnerIndex === -1 ? "Run a randow draw" : "Run again"}
+              label={winnerIndex === -1 ? t("runRandowDraw") : t("runAgain")}
             />
             <CreateTeamButton
               disabled={drawIsInProgress}
@@ -224,7 +231,7 @@ export default function Home() {
         </>
       ) : (
         <>
-          <p className="text-xl font-semibold">Team results</p>
+          <p className="text-xl font-semibold">{t("teamsAre")}</p>
           {teams.map((team, index) => (
             <Team
               key={index}
@@ -233,8 +240,11 @@ export default function Home() {
               isAnimated={teamsAreAnimated}
             />
           ))}
-          <StyledButton onClick={createRandomTeams} label="Create new teams" />
-          <StyledButton onClick={goBackToParticipants} label="Go back" />
+          <StyledButton
+            onClick={createRandomTeams}
+            label={t("createNewTeams")}
+          />
+          <StyledButton onClick={goBackToParticipants} label={t("goBack")} />
         </>
       )}
     </main>

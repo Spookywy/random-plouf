@@ -1,5 +1,6 @@
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import useTranslation from "next-translate/useTranslation";
 
 type CreateTeamButtonProps = {
   numberOfTeams: number;
@@ -20,6 +21,8 @@ export default function CreateTeamButton({
     { length: 4 },
     (_, index) => index + 2
   );
+
+  const { t } = useTranslation("common");
 
   return (
     <div className="flex w-72">
@@ -44,9 +47,12 @@ export default function CreateTeamButton({
         disabled={disabled}
         onClick={createRandomTeams}
         className="h-10 flex-grow rounded-r bg-neutral-700 text-neutral-100 hover:bg-neutral-100 hover:text-neutral-900 active:bg-neutral-100 active:text-neutral-900"
-      >
-        Create <b>{numberOfTeams}</b> random teams
-      </button>
+        dangerouslySetInnerHTML={{
+          __html: t("createRandomTeams", {
+            numberOfTeams: numberOfTeams,
+          }),
+        }}
+      />
     </div>
   );
 }

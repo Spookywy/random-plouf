@@ -1,0 +1,11 @@
+{
+  "addParticipants": "Add participants",
+  "runRandowDraw": "Run a random draw",
+  "runAgain": "Run again",
+  "notEnoughParticipants": "Please enter at least the name of two participants.",
+  "drawWinner": "{{winnerName}} won the draw!",
+  "drawWinnerAgain": "{{winnerName}} won the draw again!",
+  "teamsAre": "The teams are:",
+  "createNewTeams": "Create new teams",
+  "goBack": "Go back"
+}

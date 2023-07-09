@@ -10,6 +10,7 @@ type ParticipantProps = {
   onNameChange: (index: number, newName: string) => void;
   onRemoveParticipant: (index: number) => void;
   lastParticipantInputRef: React.RefObject<HTMLInputElement> | null;
+  isDrawInProgress: boolean;
 };
 
 export default function Participant({
@@ -20,6 +21,7 @@ export default function Participant({
   onNameChange,
   onRemoveParticipant,
   lastParticipantInputRef,
+  isDrawInProgress,
 }: ParticipantProps) {
   function handleNameChange(event: React.ChangeEvent<HTMLInputElement>) {
     let newName = event.target.value;
@@ -42,13 +44,16 @@ export default function Participant({
         placeholder={t("participant", { participantNumber: index + 1 })}
         onChange={handleNameChange}
         ref={lastParticipantInputRef}
+        readOnly={isDrawInProgress}
       />
-      <button
-        className="absolute ml-2 p-2"
-        onClick={() => onRemoveParticipant(index)}
-      >
-        <FontAwesomeIcon icon={faTrash} />
-      </button>
+      {!isDrawInProgress && (
+        <button
+          className="absolute ml-2 p-2"
+          onClick={() => onRemoveParticipant(index)}
+        >
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
+      )}
     </div>
   );
 }

@@ -69,7 +69,7 @@ export default function Home() {
   }
 
   function handleRunRandomDrawButtonClick() {
-    const participants = participantsNames.filter((name) => name !== "");
+    const participants = participantsNames.filter((name) => name.trim() !== "");
     if (participants.length < 2) {
       setShowError(true);
       return;
@@ -120,7 +120,7 @@ export default function Home() {
   }
 
   function handleCreateTeamsButtonClick() {
-    const participants = participantsNames.filter((name) => name !== "");
+    const participants = participantsNames.filter((name) => name.trim() !== "");
     if (participants.length < 2) {
       setShowError(true);
       return;
@@ -181,6 +181,7 @@ export default function Home() {
               name={participantName}
               isWinner={index === winnerIndex && !drawIsInProgress}
               isAnimated={drawIsInProgress && index === participantToAnimate}
+              isDrawInProgress={drawIsInProgress}
               index={index}
               onNameChange={handleParticipantNameChanged}
               onRemoveParticipant={removeParticipant}

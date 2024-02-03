@@ -1,5 +1,0 @@
-{
-  "createRandomTeams": "Create <b>{{numberOfTeams}}</b> random teams",
-  "participant": "Participant {{participantNumber}}",
-  "team": "Team {{teamNumber}}"
-}

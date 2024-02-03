@@ -1,6 +1,6 @@
+import { useTranslation } from "@/app/i18n/client";
 import { faTrash } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import useTranslation from "next-translate/useTranslation";
 
 type ParticipantProps = {
   name: string;
@@ -27,7 +27,7 @@ export default function Participant({
     let newName = event.target.value;
     onNameChange(index, newName);
   }
-  const { t } = useTranslation("common");
+  const { t } = useTranslation();
 
   return (
     <div>

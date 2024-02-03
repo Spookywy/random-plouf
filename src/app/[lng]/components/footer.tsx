@@ -14,8 +14,7 @@ export default function Footer() {
       <p className="hidden sm:block">&#8226;</p>
       <div className="flex gap-5">
         <p>
-          <Link href={`/?lang=en`}>EN</Link> -{" "}
-          <Link href={`/?lang=fr`}>FR</Link>
+          <Link href={`/en`}>EN</Link> - <Link href={`/fr`}>FR</Link>
         </p>
         <p>&#8226;</p>
         <a

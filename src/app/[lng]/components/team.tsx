@@ -1,14 +1,15 @@
+import { useTranslation } from "@/app/i18n/client";
 import classNames from "classnames";
-import useTranslation from "next-translate/useTranslation";
 
 type TeamProps = {
   team: Array<string>;
   teamIndex: number;
   isAnimated?: boolean;
+  lng: string;
 };
 
-export default function Team({ team, teamIndex, isAnimated }: TeamProps) {
-  const { t } = useTranslation("common");
+export default function Team({ team, teamIndex, isAnimated, lng }: TeamProps) {
+  const { t } = useTranslation(lng);
 
   return (
     <div className={`mb-5 text-center ${isAnimated ? "animate-ping" : ""}`}>

@@ -1,6 +1,6 @@
+import { useTranslation } from "@/app/i18n/client";
 import { faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import useTranslation from "next-translate/useTranslation";
 
 type CreateTeamButtonProps = {
   numberOfTeams: number;
@@ -9,6 +9,7 @@ type CreateTeamButtonProps = {
   ) => void;
   createRandomTeams: () => void;
   disabled?: boolean;
+  lng: string;
 };
 
 export default function CreateTeamButton({
@@ -16,13 +17,14 @@ export default function CreateTeamButton({
   handleNumberOfTeamsChanged,
   createRandomTeams,
   disabled,
+  lng,
 }: CreateTeamButtonProps) {
   const possibleNumberOfTeam = Array.from(
     { length: 4 },
     (_, index) => index + 2
   );
 
-  const { t } = useTranslation("common");
+  const { t } = useTranslation(lng);
 
   return (
     <div className="flex w-72">

@@ -1,5 +1,0 @@
-{
-  "createRandomTeams": "Créer <b>{{numberOfTeams}}</b> équipes aléatoires",
-  "participant": "Participant {{participantNumber}}",
-  "team": "Équipe {{teamNumber}}"
-}

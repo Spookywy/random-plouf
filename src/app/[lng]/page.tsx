@@ -1,8 +1,4 @@
 "use client";
-import CreateTeamButton from "@/components/buttons/createTeamButton";
-import StyledButton from "@/components/buttons/styledButton";
-import Participant from "@/components/participant";
-import Team from "@/components/team";
 import getNewRandomNumber from "@/utils/getNewRandomNumber";
 import shuffleArray from "@/utils/shuffleArray";
 import {
@@ -11,10 +7,19 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import useTranslation from "next-translate/useTranslation";
 import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "../i18n/client";
+import CreateTeamButton from "./components/buttons/createTeamButton";
+import StyledButton from "./components/buttons/styledButton";
+import Participant from "./components/participant";
+import Team from "./components/team";
 
-export default function Home() {
+type PageProps = {
+  params: { lng: string };
+};
+
+export default function Home({ params }: PageProps) {
+  const { lng } = params;
   const initialNumberOfParticipants = 2;
   const initialNumberOfTeams = 2;
 
@@ -40,7 +45,7 @@ export default function Home() {
 
   const lastParticipantInputRef = useRef<HTMLInputElement>(null);
 
-  const { t } = useTranslation("home");
+  const { t } = useTranslation(lng);
 
   function resetDrawHistory() {
     setWinnerIndex(-1);
@@ -190,6 +195,7 @@ export default function Home() {
                   ? lastParticipantInputRef
                   : null
               }
+              lng={lng}
             />
           ))}
           <button
@@ -227,6 +233,7 @@ export default function Home() {
               numberOfTeams={numberOfTeams}
               handleNumberOfTeamsChanged={handleNumberOfTeamsChanged}
               createRandomTeams={handleCreateTeamsButtonClick}
+              lng={lng}
             />
           </div>
         </>
@@ -239,6 +246,7 @@ export default function Home() {
               team={team}
               teamIndex={index}
               isAnimated={teamsAreAnimated}
+              lng={lng}
             />
           ))}
           <StyledButton

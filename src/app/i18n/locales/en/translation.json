@@ -7,5 +7,8 @@
   "drawWinnerAgain": "{{winnerName}} won the draw again!",
   "teamsAre": "The teams are:",
   "createNewTeams": "Create new teams",
-  "goBack": "Go back"
+  "goBack": "Go back",
+  "createRandomTeams": "Create <b>{{numberOfTeams}}</b> random teams",
+  "participant": "Participant {{participantNumber}}",
+  "team": "Team {{teamNumber}}"
 }

@@ -21,6 +21,7 @@ export const metadata: Metadata = {
   openGraph: {
     images: ["https://random-plouf.vercel.app/api/og"],
   },
+  metadataBase: new URL("https://random-plouf.vercel.app"),
 };
 export default function RootLayout({
   children,

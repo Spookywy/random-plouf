@@ -11,6 +11,7 @@ type ParticipantProps = {
   onRemoveParticipant: (index: number) => void;
   lastParticipantInputRef: React.RefObject<HTMLInputElement> | null;
   isDrawInProgress: boolean;
+  lng: string;
 };
 
 export default function Participant({
@@ -22,12 +23,13 @@ export default function Participant({
   onRemoveParticipant,
   lastParticipantInputRef,
   isDrawInProgress,
+  lng,
 }: ParticipantProps) {
   function handleNameChange(event: React.ChangeEvent<HTMLInputElement>) {
     let newName = event.target.value;
     onNameChange(index, newName);
   }
-  const { t } = useTranslation();
+  const { t } = useTranslation(lng);
 
   return (
     <div>

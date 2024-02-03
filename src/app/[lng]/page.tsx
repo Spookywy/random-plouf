@@ -195,6 +195,7 @@ export default function Home({ params }: PageProps) {
                   ? lastParticipantInputRef
                   : null
               }
+              lng={lng}
             />
           ))}
           <button
@@ -232,6 +233,7 @@ export default function Home({ params }: PageProps) {
               numberOfTeams={numberOfTeams}
               handleNumberOfTeamsChanged={handleNumberOfTeamsChanged}
               createRandomTeams={handleCreateTeamsButtonClick}
+              lng={lng}
             />
           </div>
         </>
@@ -244,6 +246,7 @@ export default function Home({ params }: PageProps) {
               team={team}
               teamIndex={index}
               isAnimated={teamsAreAnimated}
+              lng={lng}
             />
           ))}
           <StyledButton

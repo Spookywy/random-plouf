@@ -9,6 +9,7 @@ type CreateTeamButtonProps = {
   ) => void;
   createRandomTeams: () => void;
   disabled?: boolean;
+  lng: string;
 };
 
 export default function CreateTeamButton({
@@ -16,13 +17,14 @@ export default function CreateTeamButton({
   handleNumberOfTeamsChanged,
   createRandomTeams,
   disabled,
+  lng,
 }: CreateTeamButtonProps) {
   const possibleNumberOfTeam = Array.from(
     { length: 4 },
     (_, index) => index + 2
   );
 
-  const { t } = useTranslation();
+  const { t } = useTranslation(lng);
 
   return (
     <div className="flex w-72">

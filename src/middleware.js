@@ -5,8 +5,10 @@ import { cookieName, fallbackLng, languages } from "./app/i18n/settings";
 acceptLanguage.languages(languages);
 
 export const config = {
-  // matcher: '/:lng*'
-  matcher: ["/((?!api|_next/static|_next/image|assets|favicon.ico|sw.js).*)"],
+  //matcher: "/:lng*",
+  matcher: [
+    "/((?!api|_next/static|_next/image|assets|favicon.ico|icon.png|apple-icon.png|sw.js).*)",
+  ],
 };
 
 export function middleware(req) {

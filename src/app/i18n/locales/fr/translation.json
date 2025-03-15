@@ -10,5 +10,9 @@
   "goBack": "Retour",
   "createRandomTeams": "Créer <b>{{numberOfTeams}}</b> équipes aléatoires",
   "participant": "Participant {{participantNumber}}",
-  "team": "Équipe {{teamNumber}}"
+  "team": "Équipe {{teamNumber}}",
+  "announcement": {
+    "title": "Nouveauté",
+    "description": "Télécharger l’application mobile"
+  }
 }

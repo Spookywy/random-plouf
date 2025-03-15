@@ -9,6 +9,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "../i18n/client";
+import { Announcement } from "./components/annoucement/announcement";
 import CreateTeamButton from "./components/buttons/createTeamButton";
 import StyledButton from "./components/buttons/styledButton";
 import Participant from "./components/participant";
@@ -177,6 +178,7 @@ export default function Home({ params }: PageProps) {
 
   return (
     <main className="flex flex-col items-center gap-4 p-5">
+      <Announcement lng={lng} className="m-2" />
       {sectionToShow === "participants" ? (
         <>
           <p className="text-xl font-semibold">{t("addParticipants")}</p>

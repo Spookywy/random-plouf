@@ -1,0 +1,47 @@
+.rainbow {
+  position: relative;
+  background-color: #171717;
+  border-radius: 8px;
+  padding: 12px;
+  cursor: pointer;
+  width: 270px;
+  text-align: center;
+}
+
+.rainbow::before,
+.rainbow:after {
+  content: "";
+  border-radius: 8px;
+  position: absolute;
+  left: -2px;
+  top: -2px;
+  background: linear-gradient(
+    10deg,
+    #ec4899,
+    #8b5cf6,
+    #32965d,
+    #ffbe0b,
+    #880d1e
+  );
+  background-size: 400%;
+  width: calc(100% + 4px);
+  height: calc(100% + 4px);
+  z-index: -1;
+  animation: rainbowAnimation 2s linear infinite;
+}
+
+.rainbow:after {
+  filter: blur(10px);
+}
+
+@keyframes rainbowAnimation {
+  0% {
+    background-position: 0 0;
+  }
+  50% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: 0 0;
+  }
+}

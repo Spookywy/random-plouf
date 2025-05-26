@@ -9,7 +9,10 @@ export default function Footer() {
       <p className="text-center">
         Made with
         <FontAwesomeIcon className="mr-2 ml-2" icon={faHeart} />
-        by <b>Valentin Menoret</b>
+        by{" "}
+        <a href="https://spookywy.github.io">
+          <b>Valentin Menoret</b>
+        </a>
       </p>
       <p className="hidden sm:block">&#8226;</p>
       <div className="flex gap-5">

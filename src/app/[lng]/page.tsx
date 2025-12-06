@@ -7,7 +7,7 @@ import {
   faUserPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { useTranslation } from "../i18n/client";
 import { Announcement } from "./components/annoucement/announcement";
 import CreateTeamButton from "./components/buttons/createTeamButton";
@@ -16,11 +16,11 @@ import Participant from "./components/participant";
 import Team from "./components/team";
 
 type PageProps = {
-  params: { lng: string };
+  params: Promise<{ lng: string }>;
 };
 
 export default function Home({ params }: PageProps) {
-  const { lng } = params;
+  const { lng } = use(params);
   const initialNumberOfParticipants = 2;
   const initialNumberOfTeams = 2;
 

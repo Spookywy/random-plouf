@@ -23,13 +23,14 @@ export const metadata: Metadata = {
   },
   metadataBase: new URL("https://random-plouf.vercel.app"),
 };
-export default function RootLayout({
+export default async function RootLayout({
   children,
-  params: { lng },
+  params,
 }: {
   children: React.ReactNode;
-  params: { lng: string };
+  params: Promise<{ lng: string }>;
 }) {
+  const { lng } = await params;
   return (
     <html lang={lng} dir={dir(lng)} className="h-full">
       <body className="flex h-full flex-col bg-neutral-900 pt-5 text-white">

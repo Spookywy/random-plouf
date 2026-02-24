@@ -8,6 +8,8 @@ import Header from "./components/header";
 import "./globals.css";
 config.autoAddCss = false;
 
+import { GOOGLE_TAG_MANAGER_ID } from "@/constants";
+import { GoogleTagManager } from "@next/third-parties/google";
 import { languages } from "../i18n/settings";
 import { GoogleAnalytics } from "./components/google/googleAnalytics";
 
@@ -35,6 +37,7 @@ export default async function RootLayout({
   return (
     <html lang={lng} dir={dir(lng)} className="h-full">
       <GoogleAnalytics />
+      <GoogleTagManager gtmId={GOOGLE_TAG_MANAGER_ID} />
       <body className="flex h-full flex-col bg-neutral-900 pt-5 text-white">
         <header>
           <Header />

@@ -9,6 +9,7 @@ import "./globals.css";
 config.autoAddCss = false;
 
 import { languages } from "../i18n/settings";
+import { GoogleAnalytics } from "./components/google/googleAnalytics";
 
 export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }));
@@ -33,6 +34,7 @@ export default async function RootLayout({
   const { lng } = await params;
   return (
     <html lang={lng} dir={dir(lng)} className="h-full">
+      <GoogleAnalytics />
       <body className="flex h-full flex-col bg-neutral-900 pt-5 text-white">
         <header>
           <Header />

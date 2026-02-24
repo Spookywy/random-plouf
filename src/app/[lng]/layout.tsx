@@ -25,6 +25,9 @@ export const metadata: Metadata = {
     images: ["https://random-plouf.vercel.app/api/og"],
   },
   metadataBase: new URL("https://random-plouf.vercel.app"),
+  verification: {
+    google: "pQFuTos-1aQEos8gtHJEb0wzfkGLzRAb5NLiSG0p2jk",
+  },
 };
 export default async function RootLayout({
   children,

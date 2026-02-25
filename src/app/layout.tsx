@@ -1,6 +1,6 @@
 import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
-import { Analytics } from "@vercel/analytics/react";
+// import { Analytics } from "@vercel/analytics/react";
 import type { Metadata } from "next";
 import Footer from "./[lng]/components/footer";
 import Header from "./[lng]/components/header";
@@ -37,7 +37,7 @@ export default async function RootLayout({
           <Header />
         </header>
         <div className="flex-grow">{children}</div>
-        <Analytics />
+        {/* <Analytics /> */}
         <footer>
           <Footer />
         </footer>

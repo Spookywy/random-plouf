@@ -17,3 +17,11 @@ The application is deployed at the following addresses:
 
 A redirection from the Vercel deployment to the Cloudflare Pages deployment is implemented in `src/proxy.js`.
 The redirection is only applied in production.
+
+Production and previews deployments are automatically triggered.
+
+Clouflare Pages deployments are triggered on pushes to branches matching the pattern `static-*`.
+Vercel deployments are triggered on pushes to all branches except those matching the pattern `static-*`.
+
+Clouflare Pages production branch is `static-main`.
+Vercel production branch is `main`.

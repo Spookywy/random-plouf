@@ -33,7 +33,7 @@ export default async function RootLayout({
       <GoogleAnalytics />
       <GoogleTagManager gtmId={GOOGLE_TAG_MANAGER_ID} />
       <body className="flex h-full flex-col bg-neutral-900 pt-5 text-white">
-        <header>
+        <header className="px-5">
           <Header />
         </header>
         <div className="flex-grow">{children}</div>

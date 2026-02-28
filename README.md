@@ -16,7 +16,7 @@ The application is deployed at the following addresses:
 - https://random-plouf.vercel.app (Vercel)
 
 A redirection from the Vercel deployment to the Cloudflare Pages deployment is implemented in `src/proxy.js`.
-The redirection is only applied in production.
+The redirection is only applied when the domain is `random-plouf.vercel.app`.
 
 Production and previews deployments are automatically triggered.
 

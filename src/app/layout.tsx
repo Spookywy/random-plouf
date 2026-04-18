@@ -14,7 +14,7 @@ import { GoogleAnalytics } from "./[lng]/components/google/googleAnalytics";
 export const metadata: Metadata = {
   title: "RanDOM Plouf",
   description:
-    "A website for conducting random draws and generating teams randomly.",
+    "Un site pour effectuer des tirages au sort et générer des équipes aléatoirement.",
   openGraph: {
     images: ["https://random-plouf.vercel.app/api/og"],
   },
@@ -23,6 +23,7 @@ export const metadata: Metadata = {
     google: "pQFuTos-1aQEos8gtHJEb0wzfkGLzRAb5NLiSG0p2jk",
   },
 };
+
 export default async function RootLayout({
   children,
 }: {

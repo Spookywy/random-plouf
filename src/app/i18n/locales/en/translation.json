@@ -1,4 +1,7 @@
 {
+  "metadata": {
+    "description": "A website for conducting random draws and generating teams randomly."
+  },
   "addParticipants": "Add participants",
   "runRandowDraw": "Run a random draw",
   "runAgain": "Run again",

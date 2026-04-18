@@ -10,6 +10,7 @@ config.autoAddCss = false;
 
 import { GOOGLE_TAG_MANAGER_ID } from "@/constants";
 import { GoogleTagManager } from "@next/third-parties/google";
+import { useTranslation } from "../i18n";
 import { languages } from "../i18n/settings";
 import { GoogleAnalytics } from "./components/google/googleAnalytics";
 
@@ -17,18 +18,27 @@ export async function generateStaticParams() {
   return languages.map((lng) => ({ lng }));
 }
 
-export const metadata: Metadata = {
-  title: "RanDOM Plouf",
-  description:
-    "A website for conducting random draws and generating teams randomly.",
-  openGraph: {
-    images: ["https://random-plouf.vercel.app/api/og"],
-  },
-  metadataBase: new URL("https://random-plouf.vercel.app"),
-  verification: {
-    google: "pQFuTos-1aQEos8gtHJEb0wzfkGLzRAb5NLiSG0p2jk",
-  },
-};
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ lng: string }>;
+}): Promise<Metadata> {
+  const { lng } = await params;
+  const { t } = await useTranslation(lng);
+
+  return {
+    title: "RanDOM Plouf",
+    description: t("metadata.description"),
+    openGraph: {
+      images: ["https://random-plouf.vercel.app/api/og"],
+    },
+    metadataBase: new URL("https://random-plouf.vercel.app"),
+    verification: {
+      google: "pQFuTos-1aQEos8gtHJEb0wzfkGLzRAb5NLiSG0p2jk",
+    },
+  };
+}
+
 export default async function RootLayout({
   children,
   params,

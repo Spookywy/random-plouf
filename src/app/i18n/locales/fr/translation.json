@@ -1,4 +1,7 @@
 {
+  "metadata": {
+    "description": "Un site pour effectuer des tirages au sort et générer des équipes aléatoirement."
+  },
   "addParticipants": "Ajouter des participants",
   "runRandowDraw": "Tirer au sort",
   "runAgain": "Lancer à nouveau",
